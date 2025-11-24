@@ -1,7 +1,7 @@
 # file_manager.py - Основной файл запуска
 
 import sys
-#from interface import parse_arguments
+from interface import parse_arguments
 #from commands import copy_file, delete_file, count_files, add_date, search
 from utils import help
 
