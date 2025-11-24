@@ -1,6 +1,6 @@
 # utils.py
 def help():
-    print("Для запуска файлового менеджера наберите команду: python main.py <command> [options]")
+    print("Для запуска файлового менеджера наберите команду: python file_manager.py <command> [options]")
     print("Команды:")
     print("  copy <source> <destination> - Копировать файл")
     print("  delete <path> - Удалить файл или папку")

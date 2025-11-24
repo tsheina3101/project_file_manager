@@ -2,7 +2,7 @@
 
 import sys
 from interface import parse_arguments
-#from commands import copy_file, delete_file, count_files, add_date, search
+from commands import copy_file, delete_file, count_files, add_date, search
 from utils import help
 
 def main():
@@ -11,15 +11,15 @@ def main():
     # с помощью модуля sys, так как это проще.
     # Их анализ будет производиться в модуле interface
     args = sys.argv[1:]
-
-    if not args or args[0] == 'help': # нет аргументов командной строки или вызван help
+    # нет аргументов командной строки, команда неверная или вызван help
+    if not args or args[0] == 'help' or not (args[0] in ['copy', 'delete', 'count', 'add_date', 'search']):
         help() # вызываем функцию для вывода справки
         return
 
     try:
         # Разбираем аргументы командной строки, используя функцию parse_arguments из модуля interface
         command, options = parse_arguments(args)
-
+        print("Команда", command)
         if command == 'copy':
             copy_file(options.source, options.destination)
         elif command == 'delete':
