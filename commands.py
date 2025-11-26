@@ -43,20 +43,23 @@ def count_files(path):
         return count
     else:
         print(f"Папка '{path}' не существует")
+        return -1
 
 
 # добавление даты к имени файла или к именам всех файлов внутри папки (без рекурсии)
 def add_date(path):
     if os.path.isfile(path):  # если файл
         add_date_to_file(path)  # вызов функции добавления даты
+        return True
     elif os.path.isdir(path):  # если папка
         for file in os.listdir(path):  # обходим все файлы
             file_path = os.path.join(path, file)  # формируем имя (путь)
             if os.path.isfile(file_path):  # если это файл (не папка)
                 add_date_to_file(file_path)  # вызываем функцию добавления даты
+        return True
     else:
         print(f"Ошибка: '{path}' не является файлом или папкой.")
-
+        return False
 
 # функция добавления даты к одному файлу
 def add_date_to_file(file_path):

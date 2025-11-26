@@ -57,15 +57,27 @@ class TestFileManager(unittest.TestCase):
         with open(dest_file, "r") as f:
             self.assertEqual(f.read(), "test content")
 
+    def test_copy_file_raise(self):
+        dest_file = os.path.join(self.test_dir1, "test_copy.txt")
+        copy_file("new.txt", dest_file)
+        self.assertRaises(FileNotFoundError)
+
     def test_count_files(self):
         count = count_files(self.test_dir2)
         self.assertEqual(count, 2)
+
+    def test_count_files_raise(self):
+        count = count_files("new")
+        self.assertEqual(count, -1)
 
     def test_add_date(self):
         add_date(self.test_dir1)
         date_time = datetime.today().strftime("%d%m%Y")
         file1 = "test_" + date_time + '.txt'
         self.assertTrue(os.path.exists(self.test_dir1))
+
+    def test_add_date_raise(self):
+        self.assertFalse(add_date("new.txt"))
 
     def test_delete_file(self):
         delete_file(self.test_file)
@@ -74,6 +86,10 @@ class TestFileManager(unittest.TestCase):
     def test_delete_dir(self):
         delete_file(self.empty_dir)
         self.assertFalse(os.path.exists(self.empty_dir))
+
+    def test_delete_file_raise(self):
+        delete_file("new.txt")
+        self.assertRaises(FileNotFoundError)
 
     def test_search(self):
         print(self.test_dir,"two")
