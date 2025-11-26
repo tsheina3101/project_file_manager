@@ -41,7 +41,7 @@ class TestFileManager(unittest.TestCase):
             f.write("test content")
 
     def tearDown(self):
-        # Удаляем тестовые директории и файлы после каждого теста
+    # Удаляем тестовые директории и файлы после каждого теста
         shutil.rmtree(self.test_dir)
 
     def test_parse_argument(self):
@@ -76,8 +76,8 @@ class TestFileManager(unittest.TestCase):
         self.assertFalse(os.path.exists(self.empty_dir))
 
     def test_search(self):
-        delete_file(self.empty_dir)
-        self.assertFalse(os.path.exists(self.empty_dir))
+        print(self.test_dir,"two")
+        self.assertTrue(search(self.test_dir,"two"))
 
 
 if __name__ == '__main__':
