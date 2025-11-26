@@ -4,8 +4,7 @@ import shutil  # модуль для выполнения высокоуровн
 from datetime import datetime
 
 
-# Копирования файлов в модуле os нет, поэтому пришлось искать другой вариант
-# Использую модуль shutil
+# Копирования файлов в модуле os нет, поэтому использую модуль shutil
 def copy_file(source, destination):
     try:
         shutil.copy(source, destination)
