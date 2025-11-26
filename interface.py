@@ -11,26 +11,36 @@ def parse_arguments(args):
     subparsers = parser.add_subparsers(dest='command', help='Команды файлового менеджера')
 
     # Команда copy
-    if len(args) == 3:
-        copy_parser = subparsers.add_parser('copy', help='Копировать файл')
-        copy_parser.add_argument('source', help='Исходный файл')
-        copy_parser.add_argument('destination', help='Конечный файл')
-    else:
-        raise TypeError
+    if args[0] == 'copy':
+        if len(args) == 3:
+            copy_parser = subparsers.add_parser('copy', help='Копировать файл')
+            copy_parser.add_argument('source', help='Исходный файл')
+            copy_parser.add_argument('destination', help='Конечный файл')
+        else:
+            raise TypeError
 
     # Команда delete
-    delete_parser = subparsers.add_parser('delete', help='Удалить файл или папку')
-    delete_parser.add_argument('path', help='Путь к файлу или папке')
+    if args[0] == 'delete':
+        if len(args) == 2:
+            delete_parser = subparsers.add_parser('delete', help='Удалить файл или папку')
+            delete_parser.add_argument('path', help='Путь к файлу или папке')
+        else:
+            raise TypeError
 
     # Команда count
-    count_parser = subparsers.add_parser('count', help='Подсчитать количество файлов в папке')
-    count_parser.add_argument('path', help='Путь к папке')
+    if args[0] == 'count':
+        if len(args) == 2:
+            count_parser = subparsers.add_parser('count', help='Подсчитать количество файлов в папке')
+            count_parser.add_argument('path', help='Путь к папке')
+        else:
+            raise TypeError
 
     # Команда add_date
     # Работает только для одного файла или файлов одной папки (без рекурсивного обхода)
     add_date_parser = subparsers.add_parser('add_date',
                                             help='Добавить дату создания к имени файла или файлов папки')
     add_date_parser.add_argument('path', help='Путь к файлу или папке')
+
 
     # Команда search
     search_parser = subparsers.add_parser('search', help='Поиск папки')

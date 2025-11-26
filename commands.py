@@ -26,7 +26,7 @@ def delete_file(path):
             shutil.rmtree(path)
             print(f"Папка '{path}' удалена.")
         else:  # ошибка имени
-            print(f"Ошибка: '{path}' не является файлом или папкой.")
+            print(f"Ошибка: Файл или папка '{path}' не найден.")
     except FileNotFoundError:  # файл не найден
         print(f"Ошибка: Файл или папка '{path}' не найден.")
     except Exception as e:  # прочие ошибки
@@ -36,11 +36,14 @@ def delete_file(path):
 # подсчет файлов
 def count_files(path):
     count = 0
-    for _, _, files in os.walk(path):  # функция рекурсивного обхода дерева каталогов
-        # первые два параметра пропущены, так как считаем только файлы
-        count += len(files)
-    print(f"Количество файлов в папке '{path}' и вложенных папках: {count}")
-    return count
+    if os.path.isdir(path):
+        for _, _, files in os.walk(path):  # функция рекурсивного обхода дерева каталогов
+            # первые два параметра пропущены, так как считаем только файлы
+            count += len(files)
+        print(f"Количество файлов в папке '{path}' и вложенных папках: {count}")
+        return count
+    else:
+        print(f"Папка '{path}' не существует")
 
 
 # добавление даты к имени файла или к именам всех файлов внутри папки (без рекурсии)
