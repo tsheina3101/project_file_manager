@@ -3,6 +3,7 @@
 import argparse
 from utils import help
 
+
 # Так как у каждой команды разное количество параметров, то удобнее использовать подпарсеры,
 # для каждого из которого будет свой специфичный набор команд (по другому не знаю как делать)
 
@@ -36,7 +37,6 @@ def parse_arguments(args):
                                             help='Добавить дату создания к имени файла или файлов папки')
     add_date_parser.add_argument('path', help='Путь к файлу или папке')
 
-
     # Команда search
     search_parser = subparsers.add_parser('search', help='Поиск папки')
     search_parser.add_argument('source_dir', help='Имя родительской папки для поиска')
@@ -44,5 +44,3 @@ def parse_arguments(args):
 
     options = parser.parse_args(args)
     return options.command, options
-
-

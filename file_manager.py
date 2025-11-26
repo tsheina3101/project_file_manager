@@ -5,15 +5,15 @@ from interface import parse_arguments
 from commands import copy_file, delete_file, count_files, add_date, search
 from utils import help
 
-def main():
 
+def main():
     # Извлекаем все части командной строки, кроме имени файла в виде списка
     # с помощью модуля sys, так как это проще.
     # Их анализ будет производиться в модуле interface
     args = sys.argv[1:]
     # нет аргументов командной строки, команда неверная или вызван help
     if not args or args[0] == 'help' or not (args[0] in ['copy', 'delete', 'count', 'add_date', 'search']):
-        help() # вызываем функцию для вывода справки
+        help()  # вызываем функцию для вывода справки
         return
 
     try:
@@ -37,7 +37,8 @@ def main():
         print(f"Неверное количество аргументов команды")
 
     except Exception as e:
-         print(f"Произошла ошибка: {e}")
+        print(f"Произошла ошибка: {e}")
+
 
 if __name__ == "__main__":
     main()

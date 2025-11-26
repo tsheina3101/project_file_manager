@@ -83,7 +83,8 @@ def add_date_to_file(file_path):
 # генераторная функция для чтения текущей папки или файла
 def gen_files_path(cur_path, my_dir):
     for current_dir in os.walk(cur_path):
-        yield(current_dir)
+        yield (current_dir)
+
 
 # функция поиска папки
 def search(source_dir, destination_dir):
@@ -93,9 +94,9 @@ def search(source_dir, destination_dir):
         gen = gen_files_path(source_dir, destination_dir)
         # перебираем все вложенные папки и файлы
         for i_element in gen:
-            if destination_dir in i_element[1]: # если имя содержится в списке вложенных папок и файлов
+            if destination_dir in i_element[1]:  # если имя содержится в списке вложенных папок и файлов
                 print('Папка найдена. Путь к папке: ')
-                print(os.path.join(i_element[0], destination_dir)) # вывод пути
+                print(os.path.join(i_element[0], destination_dir))  # вывод пути
                 break
         else:
             print("Папка не найдена")
