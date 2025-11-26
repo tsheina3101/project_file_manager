@@ -19,7 +19,6 @@ def main():
     try:
         # Разбираем аргументы командной строки, используя функцию parse_arguments из модуля interface
         command, options = parse_arguments(args)
-        print("Команда", command)
         if command == 'copy':
             copy_file(options.source, options.destination)
         elif command == 'delete':
@@ -32,6 +31,10 @@ def main():
             search(options.source_dir, options.destination_dir)
         else:
             print("Неизвестная команда. Используйте 'help' для списка команд.")
+
+
+    except TypeError:
+        print(f"Неверное количество аргументов команды")
 
     except Exception as e:
          print(f"Произошла ошибка: {e}")
