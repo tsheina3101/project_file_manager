@@ -87,6 +87,8 @@ def gen_files_path(cur_path, my_dir):
 
 # функция поиска папки
 def search(source_dir, destination_dir):
+    if not os.path.isdir(source_dir):
+        print(f"Ошибка: '{source_dir}' не является папкой.")
     try:
         gen = gen_files_path(source_dir, destination_dir)
         # перебираем все вложенные папки и файлы
