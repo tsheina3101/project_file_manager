@@ -6,10 +6,24 @@ from commands import *
 from interface import parse_arguments
 from datetime import datetime
 
+
 class TestFileManager(unittest.TestCase):
 
     def setUp(self):
         # Создаем тестовые директории и файлы
+        ''' Структура текстовых директорий:
+        test_dir --
+                   |
+                   one --
+                        |
+                        empty_dir
+                        test.txt
+                   two --
+                        |
+                        test1.txt
+                        test2.txt
+        '''
+        self.test_dir = "test_dir"
         self.test_dir1 = "test_dir/one/"
         os.makedirs(self.test_dir1, exist_ok=True)
         self.test_file = os.path.join(self.test_dir1, "test.txt")
@@ -26,9 +40,9 @@ class TestFileManager(unittest.TestCase):
         with open(self.test_file2, "w") as f:
             f.write("test content")
 
-    # def tearDown(self):
-        # Удаляем тестовую директорию и файлы после каждого теста
-   #     shutil.rmtree(self.test_dir)
+    def tearDown(self):
+        # Удаляем тестовые директории и файлы после каждого теста
+        shutil.rmtree(self.test_dir)
 
     def test_parse_argument(self):
         command, options = parse_arguments(['copy', 'source.txt', 'dest.txt'])
@@ -45,12 +59,12 @@ class TestFileManager(unittest.TestCase):
 
     def test_count_files(self):
         count = count_files(self.test_dir2)
-        self.assertEqual(count,2)
+        self.assertEqual(count, 2)
 
     def test_add_date(self):
         add_date(self.test_dir1)
         date_time = datetime.today().strftime("%d%m%Y")
-        file1 = "test_"+date_time+'.txt'
+        file1 = "test_" + date_time + '.txt'
         self.assertTrue(os.path.exists(self.test_dir1))
 
     def test_delete_file(self):
@@ -60,6 +74,11 @@ class TestFileManager(unittest.TestCase):
     def test_delete_dir(self):
         delete_file(self.empty_dir)
         self.assertFalse(os.path.exists(self.empty_dir))
+
+    def test_search(self):
+        delete_file(self.empty_dir)
+        self.assertFalse(os.path.exists(self.empty_dir))
+
 
 if __name__ == '__main__':
     unittest.main(argv=['first-arg-is-ignored'], exit=False)
